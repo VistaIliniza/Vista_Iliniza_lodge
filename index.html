@@ -7,12 +7,16 @@
     
     <link rel="icon" type="image/png" href="img/logo.png">
     
+    <!-- Preconexiones para acelerar la carga de fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
+    
+    <!-- El script con DEFER carga en segundo plano sin bloquear la vista -->
+    <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -20,6 +24,7 @@
         
         <header class="lodge-header">
             <div class="logo-container">
+                <!-- El logo carga inmediatamente -->
                 <img src="img/logo.png" alt="Vista Iliniza Lodge Logo" class="logo-img">
             </div>
             <h1 class="lodge-title">Vista Iliniza Lodge</h1>
@@ -37,19 +42,24 @@
                 <div class="link-icon-right"><i class="fa-solid fa-chevron-down"></i></div>
             </button>
 
+            <!-- Carga Perezosa (Lazy) en las miniaturas ocultas -->
             <div class="cabins-dropdown" id="cabins-dropdown">
                 <div class="rooms-grid">
                     <div class="room-item" data-target="modal-iliniza">
-                        <img src="img/vista-iliniza.jpg" alt="Vista Iliniza">
+                        <img src="img/vista-iliniza.jpg" alt="Vista Iliniza" loading="lazy">
                         <span>Cabaña Vista Iliniza</span>
                     </div>
                     <div class="room-item" data-target="modal-cotopaxi">
-                        <img src="img/vista-cotopaxi.jpg" alt="Vista Cotopaxi">
+                        <img src="img/vista-cotopaxi.jpg" alt="Vista Cotopaxi" loading="lazy">
                         <span>Cabaña Vista Cotopaxi</span>
                     </div>
                     <div class="room-item" data-target="modal-cielo">
-                        <img src="img/vista-cielo.jpg" alt="Vista Cielo">
+                        <img src="img/vista-cielo.jpg" alt="Vista Cielo" loading="lazy">
                         <span>Cabaña Vista Cielo</span>
+                    </div>
+                    <div class="room-item" data-target="modal-fullday">
+                        <img src="img/promo-full-day.jpg" alt="Promo Full Day" loading="lazy">
+                        <span>Promo Full Day</span>
                     </div>
                 </div>
                 <p class="dropdown-hint">Toca una imagen para ampliar los detalles y tarifas.</p>
@@ -63,15 +73,6 @@
                 </div>
                 <div class="link-icon-right"><i class="fa-solid fa-chevron-right"></i></div>
             </button>
-
-            <a href="https://sites.google.com/view/vista-iliniza-lodge/precios?authuser=0" target="_blank" class="link-item">
-                <div class="link-icon-left"><i class="fa-solid fa-tags" style="color: #edb00a;"></i></div>
-                <div class="link-text">
-                    <strong>Precios y Promociones</strong>
-                    <span>Revisa nuestras tarifas y descuentos actualizados</span>
-                </div>
-                <div class="link-icon-right"><i class="fa-solid fa-chevron-right"></i></div>
-            </a>
 
             <a href="https://vistailiniza.github.io/Vista_Iliniza_Web/" target="_blank" class="link-item">
                 <div class="link-icon-left"><i class="fa-solid fa-globe" style="color: #93c5fd;"></i></div>
@@ -140,6 +141,7 @@
         <span>Reserva aquí<br><small>Habla con nosotros</small></span>
     </a>
 
+    <!-- CAPA SUPERPUESTA DE MODALES -->
     <div class="modal-overlay" id="modal-overlay">
 
         <div class="modal-card" id="modal-consulta">
@@ -175,17 +177,17 @@
                     <div class="guest-row">
                         <span class="guest-label">Adultos</span>
                         <div class="counter-box">
-                            <button type="button" class="btn-count minus" data-target="count-adults" aria-label="Reducir adultos">-</button>
+                            <button type="button" class="btn-count minus" data-target="count-adults">-</button>
                             <input type="number" id="count-adults" class="count-value" value="2" min="1">
-                            <button type="button" class="btn-count plus" data-target="count-adults" aria-label="Aumentar adultos">+</button>
+                            <button type="button" class="btn-count plus" data-target="count-adults">+</button>
                         </div>
                     </div>
                     <div class="guest-row">
                         <span class="guest-label">Niños</span>
                         <div class="counter-box">
-                            <button type="button" class="btn-count minus" data-target="count-kids" aria-label="Reducir niños">-</button>
+                            <button type="button" class="btn-count minus" data-target="count-kids">-</button>
                             <input type="number" id="count-kids" class="count-value" value="0" min="0">
-                            <button type="button" class="btn-count plus" data-target="count-kids" aria-label="Aumentar niños">+</button>
+                            <button type="button" class="btn-count plus" data-target="count-kids">+</button>
                         </div>
                     </div>
                 </div>
@@ -206,24 +208,52 @@
         <div class="modal-card" id="modal-iliniza">
             <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-gallery">
-                <img src="img/vista-iliniza.jpg" alt="Cabaña Vista Iliniza completa">
+                <!-- Carga Perezosa en fotos HD de los modales -->
+                <img src="img/vista-iliniza.jpg" alt="Cabaña Vista Iliniza" loading="lazy">
             </div>
             <div class="modal-content">
                 <div class="modal-header-info">
                     <span class="modal-tag">Ideal para Parejas o Familias</span>
                     <h3 class="modal-title">Cabaña Vista Iliniza</h3>
                 </div>
-                <p class="modal-description">
-                    Un refugio encantador rodeado de un entorno impresionante con vistas directas al Iliniza y Cotopaxi. Cuenta con amplias ventanas estructurales estratégicamente posicionadas para admirar el majestuoso atardecer andino desde la comodidad de tus espacios.
-                </p>
-
-                <h4 class="features-title">Equipamiento e instalaciones incluidas:</h4>
+                
+                <h4 class="features-title">Instalaciones:</h4>
                 <ul class="features-list">
-                    <li><i class="fa-solid fa-bed"></i> Cama confortable de dos plazas y media.</li>
-                    <li><i class="fa-solid fa-tv"></i> Pantalla de televisión de 50 pulgadas configurada.</li>
-                    <li><i class="fa-solid fa-kitchen-set"></i> Cocina completa equipada con utensilios de cocina y refrigerador.</li>
-                    <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado interno climatizado para relajación completa.</li>
+                    <li><i class="fa-solid fa-bed"></i> Cama confortable de 2 plazas y media.</li>
+                    <li><i class="fa-solid fa-couch"></i> Sofá cama de 2 plazas, ideal para familias o grupos pequeños.</li>
+                    <li><i class="fa-solid fa-tv"></i> Televisores Smart de 50" y 32" para tu entretenimiento.</li>
+                    <li><i class="fa-solid fa-kitchen-set"></i> Cocina equipada.</li>
+                    <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado interior climatizado, perfecto para disfrutar de un momento de relajación y descanso en cualquier momento.</li>
                 </ul>
+
+                <h4 class="features-title" style="margin-top: 15px;">Tarifas Oficiales:</h4>
+                <div class="pricing-table">
+                    <div class="pricing-header">
+                        <div>Días</div>
+                        <div>Por persona</div>
+                        <div>Por pareja</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Dom - Jue</div>
+                        <div class="p-person">$30.00</div>
+                        <div class="p-couple">$60.00</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Viernes</div>
+                        <div class="p-person">$40.00</div>
+                        <div class="p-couple">$80.00</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Sábado</div>
+                        <div class="p-person">$50.00</div>
+                        <div class="p-couple">$100.00</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Feriados</div>
+                        <div class="p-person">$65.00</div>
+                        <div class="p-couple">$130.00</div>
+                    </div>
+                </div>
 
                 <a href="https://wa.me/593999366565?text=Hola,%20deseo%20consultar%20fechas%20libres%20para%20hospedarme%20en%20la%20Cabaña%20Vista%20Iliniza." target="_blank" class="modal-btn-action">
                     <i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp
@@ -234,24 +264,50 @@
         <div class="modal-card" id="modal-cotopaxi">
             <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-gallery">
-                <img src="img/vista-cotopaxi.jpg" alt="Cabaña Vista Cotopaxi completa">
+                <img src="img/vista-cotopaxi.jpg" alt="Cabaña Vista Cotopaxi" loading="lazy">
             </div>
             <div class="modal-content">
                 <div class="modal-header-info">
                     <span class="modal-tag">Diseño Rústico Alpino</span>
                     <h3 class="modal-title">Cabaña Vista Cotopaxi</h3>
                 </div>
-                <p class="modal-description">
-                    Lujosa estructura de madera con diseño clásico A-Frame que ofrece una panorámica despejada hacia el volcán Cotopaxi. Ideal para desconectarse completamente del ruido urbano en una atmósfera íntima, segura y de alto confort.
-                </p>
 
-                <h4 class="features-title">Equipamiento e instalaciones incluidas:</h4>
+                <h4 class="features-title">Instalaciones:</h4>
                 <ul class="features-list">
-                    <li><i class="fa-solid fa-bed"></i> Dormitorio en altillo con cama de dos plazas y media.</li>
-                    <li><i class="fa-solid fa-tv"></i> Sistema de televisión de 50 pulgadas.</li>
-                    <li><i class="fa-solid fa-kitchen-set"></i> Cocina equipada con vajilla completa, encimera y refrigerador.</li>
-                    <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado de relajación con ventanal panorámico panorámico.</li>
+                    <li><i class="fa-solid fa-bed"></i> Cama confortable de 2 plazas y media.</li>
+                    <li><i class="fa-solid fa-tv"></i> Televisión Smart de 55 pulgadas.</li>
+                    <li><i class="fa-solid fa-kitchen-set"></i> Cocina equipada.</li>
+                    <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado interior climatizado para relajación completa.</li>
                 </ul>
+
+                <h4 class="features-title" style="margin-top: 15px;">Tarifas Oficiales:</h4>
+                <div class="pricing-table">
+                    <div class="pricing-header">
+                        <div>Días</div>
+                        <div>Por persona</div>
+                        <div>Por pareja</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Dom - Jue</div>
+                        <div class="p-person">$30.00</div>
+                        <div class="p-couple">$60.00</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Viernes</div>
+                        <div class="p-person">$40.00</div>
+                        <div class="p-couple">$80.00</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Sábado</div>
+                        <div class="p-person">$50.00</div>
+                        <div class="p-couple">$100.00</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Feriados</div>
+                        <div class="p-person">$65.00</div>
+                        <div class="p-couple">$130.00</div>
+                    </div>
+                </div>
 
                 <a href="https://wa.me/593999366565?text=Hola,%20deseo%20consultar%20fechas%20libres%20para%20hospedarme%20en%20la%20Cabaña%20Vista%20Cotopaxi." target="_blank" class="modal-btn-action">
                     <i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp
@@ -262,24 +318,50 @@
         <div class="modal-card" id="modal-cielo">
             <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-gallery">
-                <img src="img/vista-cielo.jpg" alt="Cabaña Vista Cielo completa">
+                <img src="img/vista-cielo.jpg" alt="Cabaña Vista Cielo" loading="lazy">
             </div>
             <div class="modal-content">
                 <div class="modal-header-info">
                     <span class="modal-tag">Perfecta para Parejas</span>
                     <h3 class="modal-title">Cabaña Vista Cielo</h3>
                 </div>
-                <p class="modal-description">
-                    Estructura premium construida en dos plantas. Diseñada meticulosamente para brindar una experiencia de glamping elevado, perfecta para contemplar los limpios cielos estrellados de Toacazo desde la comodidad térmica de tu habitación.
-                </p>
 
-                <h4 class="features-title">Equipamiento e instalaciones incluidas:</h4>
+                <h4 class="features-title">Instalaciones:</h4>
                 <ul class="features-list">
                     <li><i class="fa-solid fa-stairs"></i> Distribución de dos pisos con balcón frontal integrado.</li>
-                    <li><i class="fa-solid fa-bed"></i> Cama matrimonial con lencería térmica de alta montaña.</li>
-                    <li><i class="fa-solid fa-kitchen-set"></i> Cocina completa funcional integrada en la planta baja.</li>
-                    <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi interno independiente con hidromasaje regulable.</li>
+                    <li><i class="fa-solid fa-bed"></i> Cama confortable de 2 plazas y media.</li>
+                    <li><i class="fa-solid fa-kitchen-set"></i> Cocina equipada.</li>
+                    <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado interior climatizado para relajación completa.</li>
                 </ul>
+
+                <h4 class="features-title" style="margin-top: 15px;">Tarifas Oficiales:</h4>
+                <div class="pricing-table">
+                    <div class="pricing-header">
+                        <div>Días</div>
+                        <div>Por persona</div>
+                        <div>Por pareja</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Dom - Jue</div>
+                        <div class="p-person">$30.00</div>
+                        <div class="p-couple">$60.00</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Viernes</div>
+                        <div class="p-person">$40.00</div>
+                        <div class="p-couple">$80.00</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Sábado</div>
+                        <div class="p-person">$50.00</div>
+                        <div class="p-couple">$100.00</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="p-day"><i class="fa-solid fa-tag"></i> Feriados</div>
+                        <div class="p-person">$65.00</div>
+                        <div class="p-couple">$130.00</div>
+                    </div>
+                </div>
 
                 <a href="https://wa.me/593999366565?text=Hola,%20deseo%20consultar%20fechas%20libres%20para%20hospedarme%20en%20la%20Cabaña%20Vista%20Cielo." target="_blank" class="modal-btn-action">
                     <i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp
@@ -287,8 +369,44 @@
             </div>
         </div>
 
+        <div class="modal-card" id="modal-fullday">
+            <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-gallery">
+                <img src="img/promo-full-day.jpg" alt="Promo Full Day" loading="lazy">
+            </div>
+            <div class="modal-content">
+                <div class="modal-header-info">
+                    <span class="modal-tag">5 horas por pareja</span>
+                    <h3 class="modal-title">Promo Full Day</h3>
+                </div>
+                <p class="modal-description">
+                    La escapada perfecta en un solo día. Desconecta de la rutina y conecta con la naturaleza.
+                </p>
+
+                <h4 class="features-title">Beneficios incluidos:</h4>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-fire"></i> Mini chimenea.</li>
+                    <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi climatizado privado.</li>
+                    <li><i class="fa-solid fa-shirt"></i> Vestimenta tradicional de la zona.</li>
+                    <li><i class="fa-solid fa-kitchen-set"></i> Cocina equipada y área de parrilla.</li>
+                    <li><i class="fa-solid fa-paw"></i>Observación a los animalitos de la granja.</li>
+                </ul>
+
+                <h4 class="features-title" style="margin-top: 15px;">Tarifa Oficial:</h4>
+                <div class="pricing-table" style="margin-bottom: 15px;">
+                    <div class="pricing-row" style="grid-template-columns: 1fr 1fr;">
+                        <div class="p-day" style="justify-content: center;"><i class="fa-solid fa-calendar-check"></i> Dom - Vie</div>
+                        <div class="p-couple" style="font-size: 1rem; border-left: 1px solid #cbd5e1;">$49.99 <span style="font-size: 0.75rem; color:#64748b; font-weight: 500;">/pareja</span></div>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/593999366565?text=Hola,%20deseo%20consultar%20disponibilidad%20para%20la%20Promo%20Full%20Day." target="_blank" class="modal-btn-action">
+                    <i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp
+                </a>
+            </div>
+        </div>
+
     </div>
 
-    <script src="script.js"></script>
 </body>
 </html>

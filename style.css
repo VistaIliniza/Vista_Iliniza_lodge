@@ -52,7 +52,6 @@ body {
     margin-bottom: 25px; 
 }
 
-/* AQUÍ SE QUITÓ EL FONDO BLANCO PARA EL LOGO */
 .logo-container {
     display: inline-block;
     margin-bottom: 10px;
@@ -80,7 +79,7 @@ body {
 }
 
 /* =========================================
-   3. BOTONES DE ENLACES (LINKTREE PREMIUM)
+   3. BOTONES DE ENLACES
    ========================================= */
 .links-list {
     display: flex;
@@ -102,6 +101,7 @@ body {
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     transition: all 0.25s ease;
+    will-change: transform; /* Optimización GPU */
 }
 
 .link-item:hover { 
@@ -145,7 +145,6 @@ body {
 .link-icon-left.bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
 .link-icon-left.bg-fb { background: #1877F2; }
 .link-icon-left.bg-tk { background: #000000; border: 1px solid rgba(255,255,255,0.2); }
-.link-icon-left.bg-tg { background: #0088cc; } /* ÍCONO DE TELEGRAM */
 
 /* =========================================
    4. BLOQUE DESPLEGABLE DE CABAÑAS
@@ -154,13 +153,15 @@ body {
     display: none; background: rgba(0,0,0,0.25); border-radius: 16px;
     padding: 14px; border: 1px solid var(--glass-border);
     margin-top: -4px; margin-bottom: 8px; animation: slideDown 0.3s ease-out forwards;
+    will-change: opacity, transform; /* Optimización GPU */
 }
 .cabins-dropdown.show { display: block; }
+
 .rooms-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.rooms-grid .room-item:nth-child(3) { grid-column: span 2; }
-.room-item { background: #162f1b; border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform 0.2s, border-color 0.2s; border: 1px solid rgba(255,255,255,0.04); }
+
+.room-item { background: #162f1b; border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform 0.2s, border-color 0.2s; border: 1px solid rgba(255,255,255,0.04); will-change: transform; }
 .room-item:hover { transform: scale(1.02); border-color: var(--brand-accent); }
-.room-item img { width: 100%; height: 85px; object-fit: cover; display: block; }
+.room-item img { width: 100%; height: 100px; object-fit: cover; object-position: center; display: block; }
 .room-item span { display: block; padding: 8px; font-size: 0.72rem; font-weight: 700; text-align: center; }
 .dropdown-hint { font-size: 0.68rem; color: var(--text-muted); text-align: center; margin-top: 8px; font-style: italic; }
 
@@ -170,9 +171,9 @@ body {
    5. CAJA INFORMATIVA DE INCLUSIONES
    ========================================= */
 .info-box {
-    background: rgba(20, 45, 25, 0.85); /* Fondo oscuro semitransparente elegante */
+    background: rgba(20, 45, 25, 0.85); 
     border: 1px solid var(--glass-border);
-    color: var(--text-main); /* Textos blancos */
+    color: var(--text-main); 
     border-radius: 20px;
     padding: 22px 18px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.25);
@@ -181,7 +182,7 @@ body {
     font-size: 1.05rem; 
     font-weight: 800; 
     margin-bottom: 12px; 
-    color: var(--brand-accent); /* Título dorado para resaltar */
+    color: var(--brand-accent); 
 }
 .info-list { 
     list-style: none; 
@@ -199,18 +200,18 @@ body {
     line-height: 1.35; 
 }
 .info-list li i { 
-    color: #4ade80; /* Íconos verde claro brillante */
+    color: #4ade80; 
     font-size: 0.85rem; 
     margin-top: 1px; 
 }
 .info-alert {
-    background: rgba(237, 176, 10, 0.15); /* Fondo amarillento semitransparente */
+    background: rgba(237, 176, 10, 0.15); 
     border-left: 4px solid var(--brand-accent);
     padding: 10px 12px;
     border-radius: 0 8px 8px 0;
     font-size: 0.78rem;
     font-weight: 700;
-    color: #fde047; /* Texto amarillo claro que contrasta con el fondo oscuro */
+    color: #fde047; 
     display: flex;
     gap: 8px;
     align-items: center;
@@ -225,6 +226,7 @@ body {
     text-decoration: none; padding: 12px 22px; border-radius: 30px; display: flex;
     align-items: center; gap: 12px; box-shadow: 0 10px 28px rgba(0,0,0,0.45);
     border: 2px solid var(--brand-accent); z-index: 1000; transition: transform 0.2s;
+    will-change: transform; /* Optimización GPU */
 }
 .floating-wsp-btn i { font-size: 1.7rem; color: #4ade80; }
 .floating-wsp-btn span { line-height: 1.15; font-weight: 700; font-size: 0.92rem; }
@@ -239,6 +241,7 @@ body {
     background: rgba(6, 15, 10, 0.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     z-index: 2000; display: flex; justify-content: center; align-items: center;
     opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 15px;
+    will-change: opacity, visibility; /* Optimización GPU */
 }
 .modal-overlay.active { opacity: 1; visibility: visible; }
 
@@ -247,6 +250,7 @@ body {
     border-radius: 20px; overflow-y: auto; position: relative;
     display: none; transform: translateY(25px); transition: transform 0.3s ease;
     box-shadow: 0 25px 55px rgba(0,0,0,0.6); color: var(--brand-dark);
+    will-change: transform; /* Optimización GPU */
 }
 .modal-card.active { display: block; transform: translateY(0); }
 .modal-card::-webkit-scrollbar { width: 5px; }
@@ -260,7 +264,6 @@ body {
 }
 .close-modal:hover { background: var(--brand-accent); color: var(--brand-dark); }
 
-/* Encabezado del Consultor */
 .modal-header-color { background: var(--brand-light); color: #ffffff; padding: 22px 18px; text-align: center; }
 .modal-header-color i { font-size: 2.2rem; margin-bottom: 8px; color: var(--brand-accent); }
 .modal-header-color h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; }
@@ -278,7 +281,6 @@ body {
 .dates-row { display: flex; gap: 10px; }
 .dates-row .form-group { flex: 1; }
 
-/* Contadores */
 .guests-container { background: #f1f5f9; padding: 12px; border-radius: 12px; margin-bottom: 18px; }
 .guest-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .guest-row:last-child { margin-bottom: 0; }
@@ -287,7 +289,6 @@ body {
 .btn-count { width: 28px; height: 28px; border-radius: 50%; border: none; background: #e2e8f0; color: var(--brand-dark); font-weight: 800; cursor: pointer; }
 .btn-count:hover { background: var(--brand-light); color: #ffffff; }
 
-/* Casilla de input de huespedes */
 .count-value { 
     font-weight: 700; 
     width: 30px; 
@@ -308,18 +309,16 @@ body {
 .btn-search-full { width: 100%; padding: 14px; border-radius: 12px; border: none; background: var(--brand-light); color: #ffffff; font-weight: 800; font-size: 1rem; font-family: 'Montserrat'; cursor: pointer; box-shadow: 0 4px 12px rgba(32, 70, 41, 0.25); }
 .btn-search-full:hover { background: var(--brand-accent); color: var(--brand-dark); }
 
-/* Animación de Espera */
 .loading-box { text-align: center; padding: 15px 0; color: #475569; font-size: 0.85rem; font-weight: 600; }
 .spinner { border: 3px solid #e2e8f0; border-top: 3px solid var(--brand-light); border-radius: 50%; width: 35px; height: 35px; animation: spin 0.9s linear infinite; margin: 0 auto 8px auto; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-/* Cajas de Resultado */
 .result-box { margin-top: 15px; border-radius: 10px; padding: 16px; text-align: center; font-size: 0.85rem; font-weight: 600; line-height: 1.4; }
 .result-box.success { background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; }
 .result-box.error { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
 .btn-wsp-success { display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: #ffffff; padding: 11px 18px; border-radius: 10px; text-decoration: none; margin-top: 12px; font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(37,211,102,0.3); }
 
-/* Diseño Interno Tarjetas de Cabaña */
+/* Diseño Interno Tarjetas */
 .modal-gallery { width: 100%; height: 210px; }
 .modal-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .modal-content { padding: 20px; }
@@ -334,8 +333,63 @@ body {
 .features-list li { font-size: 0.8rem; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px; color: #334155; line-height: 1.4; }
 .features-list li i { color: var(--brand-accent); font-size: 1rem; width: 16px; text-align: center; margin-top: 1px; }
 
-.modal-btn-action { display: flex; justify-content: center; align-items: center; gap: 8px; background: var(--brand-light); color: #ffffff; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: background 0.2s; }
+.modal-btn-action { display: flex; justify-content: center; align-items: center; gap: 8px; background: var(--brand-light); color: #ffffff; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: background 0.2s; margin-top: 10px; }
 .modal-btn-action:hover { background: var(--brand-accent); color: var(--brand-dark); }
+
+/* =========================================
+   8. TABLA DE PRECIOS SIMÉTRICA (NUEVO)
+   ========================================= */
+.pricing-table {
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.pricing-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: var(--brand-light);
+    color: white;
+    padding: 8px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+}
+.pricing-header > div:first-child {
+    text-align: left;
+}
+.pricing-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr;
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.8rem;
+    color: #334155;
+    align-items: center;
+}
+.pricing-row:last-child {
+    border-bottom: none;
+}
+.p-day {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+}
+.p-day i {
+    color: var(--brand-accent);
+}
+.p-person {
+    text-align: center;
+    border-right: 1px solid #cbd5e1; /* Línea divisoria simétrica */
+}
+.p-couple {
+    text-align: center;
+    font-weight: 800;
+    color: var(--brand-dark);
+}
 
 /* =========================================
    9. DISEÑO RESPONSIVO MÓVIL
@@ -343,7 +397,29 @@ body {
 @media (max-width: 480px) {
     .glass-panel { padding: 30px 14px; border-radius: 20px; }
     .rooms-grid { grid-template-columns: 1fr; }
-    .rooms-grid .room-item:nth-child(3) { grid-column: span 1; }
+    
+    /* ALTURA AUMENTADA PARA MÓVIL Y CENTRADO PERFECTO */
+    .room-item img { 
+        height: 130px; 
+        object-position: center; 
+    }
+    
+    /* AJUSTES PARA LA TABLA SIMÉTRICA EN MÓVIL */
+    .pricing-row {
+        grid-template-columns: 1fr 0.9fr 0.9fr;
+        padding: 10px 5px;
+        font-size: 0.75rem;
+    }
+    .p-day {
+        font-size: 0.7rem;
+    }
+    .p-person {
+        font-size: 0.75rem;
+    }
+    .p-couple {
+        font-size: 0.75rem;
+    }
+    
     .floating-wsp-btn { bottom: 20px; right: 20px; padding: 10px 16px; }
     .modal-gallery { height: 180px; }
 }
